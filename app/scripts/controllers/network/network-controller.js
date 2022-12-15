@@ -122,6 +122,10 @@ export default class NetworkController extends EventEmitter {
     this.on(NETWORK_EVENTS.NETWORK_DID_CHANGE, this.lookupNetwork);
   }
 
+  async destroy() {
+    await this._blockTracker.destroy();
+  }
+
   async initializeProvider(providerParams) {
     this._baseProviderParams = providerParams;
     const { type, rpcUrl, chainId } = this.getProviderConfig();
