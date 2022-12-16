@@ -3,7 +3,6 @@ const { promises: fs } = require('fs');
 const BigNumber = require('bignumber.js');
 const mockttp = require('mockttp');
 const createStaticServer = require('../../development/create-static-server');
-const enLocaleMessages = require('../../app/_locales/en/messages.json');
 const { setupMocking } = require('./mock-e2e');
 const Ganache = require('./ganache');
 const FixtureServer = require('./fixture-server');
@@ -253,7 +252,10 @@ const completeImportSRPOnboardingFlow = async (
   await driver.clickElement('[data-testid="metametrics-no-thanks"]');
 
   // import with recovery phrase
-  await driver.pasteIntoField('[data-testid="import-srp__srp-word-0"]', seedPhrase);
+  await driver.pasteIntoField(
+    '[data-testid="import-srp__srp-word-0"]',
+    seedPhrase,
+  );
   await driver.clickElement('[data-testid="import-srp-confirm"]');
 
   // create password
@@ -275,7 +277,6 @@ const completeImportSRPOnboardingFlowWordByWord = async (
   seedPhrase,
   password,
 ) => {
-
   // welcome
   await driver.clickElement('[data-testid="onboarding-import-wallet"]');
 
